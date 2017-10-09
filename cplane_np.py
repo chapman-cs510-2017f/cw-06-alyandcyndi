@@ -9,6 +9,8 @@
 ###
 
 from abscplane import AbsComplexPlane
+import numpy as np
+import pandas as pd
 
 class ArrayComplexPlane(AbsComplexPlane):
     
@@ -23,7 +25,7 @@ to refresh and zoom in the grid, a function to create the plane itself, and a fu
 
 from abscplane import AbsComplexPlane
 
-class ListComplexPlane(AbsComplexPlane):
+class ArrayComplexPlane(AbsComplexPlane):
     """This class creates a complex plane and uses different functions to edit the plane.
      Attributes:
         xmax (float) : maximum horizontal axis value
@@ -58,6 +60,7 @@ class ListComplexPlane(AbsComplexPlane):
         
     ##creates plane of complex points    
     def __create_plane(self, xmin, xmax, xlen, ymin, ymax, ylen):
+       
         """This function creates a list of lists that contains the points for the complex plane.  It does so by
            starting at the minimum point, and moves towards the maximum point in equal intervals based on the xlen
            and ylen values.
@@ -72,35 +75,18 @@ class ListComplexPlane(AbsComplexPlane):
         Returns:
             plane[]: The list of complex points
         """
-        #gets values we can use to space the points out evenly
-        dx = (xmax - xmin)/(xlen - 1)
-        dy = (ymax - ymin)/(ylen - 1)
         
-        #lists of points on the x and y axis
-        xpoints = []
-        ypoints = []
+        #Gives us evenly spaced numbers over the min/max intervals for x and y
+        xp = np.linespace(self.xmin, self.xmax, self.xlen)
+        yp = np.linespace(self.ymin, self.ymax, self.ylen)
         
-        #appends points to the x axis
-        xpoints.append(xmin)
+        #returns coordinate matrices from coordinate vectors
+        x,y = np.meshgrid(xp,yp)
         
-        for i in range(1, xlen):
-            xpoints.append(xmin + i*dx)
-            
-        #appends points to the y axis
-        ypoints.append(ymin)
-    
-        for i in range(1,ylen):
-            ypoints.append(ymin + i*dy)
-        #create initial plane list
-        plane = []
-        #adds the complex numbers to the plane list so that they're
-        #added to each list by row
-        for x in xpoints:
-            plane.append([])
-            for y in ypoints:
-                plane[-1].append([x + y*1j])
-        print(plane)
-        return plane
+        #creates complex plane using vectors from meshgrid
+        self.plane = x + y*1j
+        
+        return self.plane
                 
         
     
