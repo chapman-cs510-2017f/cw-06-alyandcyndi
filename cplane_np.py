@@ -13,15 +13,14 @@ import numpy as np
 import pandas as pd
 
 class ArrayComplexPlane(AbsComplexPlane):
-    
-"""Complex Plane Creation
+    """Complex Plane Creation
     $ python
     >>> import cplane
     >>> help(cplane)
-The ListComplexPlane class is meant to create a nested list grid of complex numbers.  It initializes with the min and max points
-of both axis, their lengths, the plane of points, and an empty list of functions applied to said points.  It contains functions
-to refresh and zoom in the grid, a function to create the plane itself, and a function to apply mathematical functions to the points.
-"""
+    The ListComplexPlane class is meant to create a nested list grid of complex numbers.  It initializes with the min and max points
+    of both axis, their lengths, the plane of points, and an empty list of functions applied to said points.  It contains functions
+    to refresh and zoom in the grid, a function to create the plane itself, and a function to apply mathematical functions to the points.
+    """
 
 from abscplane import AbsComplexPlane
 
@@ -77,14 +76,16 @@ class ArrayComplexPlane(AbsComplexPlane):
         """
         
         #Gives us evenly spaced numbers over the min/max intervals for x and y
-        xp = np.linespace(self.xmin, self.xmax, self.xlen)
-        yp = np.linespace(self.ymin, self.ymax, self.ylen)
+        xp = np.linspace(self.xmin, self.xmax, self.xlen)
+        yp = np.linspace(self.ymin, self.ymax, self.ylen)
         
         #returns coordinate matrices from coordinate vectors
         x,y = np.meshgrid(xp,yp)
         
         #creates complex plane using vectors from meshgrid
         self.plane = x + y*1j
+        
+        print(self.plane)
         
         return self.plane
                 
@@ -101,14 +102,12 @@ class ArrayComplexPlane(AbsComplexPlane):
         """Adds a function f to the attribute fs.  Then it applies that function to every
            point in the plane.
         """
+
         #adds f to fs
         self.fs.append(f)
-        self.f = f
-        #transforms points of the plane
-        for i in range(self.xlen):
-            for j in range(self.ylen):
-                self.plane[i][j] = f(self.plane[i][j])
         
+        self.plane = f(self.plane)
+        return self.plane
         
     def zoom(self,xmin,xmax,xlen,ymin,ymax,ylen):
         """Resets the x and y attributes and recreates the plane with new x and y values.
