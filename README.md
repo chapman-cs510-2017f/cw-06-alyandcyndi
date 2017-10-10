@@ -1,6 +1,6 @@
 # CS510 CW 6
 
-**Author(s):** **CHANGEME**
+**Author(s):** **Aly Baughman, Cynthia Parks**
 
 [![Build Status](https://travis-ci.org/chapman-cs510-2017f/cw-06-YOURNAME.svg?branch=master)](https://travis-ci.org/chapman-cs510-2017f/cw-06-YOURNAME)
 
@@ -19,7 +19,7 @@
 
 ## Assessment
 
-Analyze in this section what you found useful about this assignment in your own words. Include any lingering questions or comments that you may have.
+It's helpful and interesting to take the time to look at another group's code and see their process and the differences in approach.  Additionally it's great to get feedback from classmates on how we can improve our own work.  Using numpy and panda for this project has made certain aspects easier but other aspects a bit trickier.  The ease of making the nested lists with these imports was really nice, it erased a lot of previous code and confusing loops.  One of the biggest struggles at the moment is figuring out how to get the commas back in one of the lists, and working with the different float types to fix the "." display for every number, even when it's not necessary.
 
 **CHANGEME**
 
@@ -32,4 +32,4 @@ I pledge that all the work in this repository is my own with only the following 
 
 Signed,
 
-**YOURNAME**
+**Aly Baughman, Cynthia Parks**
